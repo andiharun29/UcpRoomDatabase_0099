@@ -34,6 +34,56 @@ import com.example.ucp2.ui.ViewModel.Supplier.SupplierUIState
 import com.example.ucp2.ui.ViewModel.Supplier.SupplierViewModel
 import kotlinx.coroutines.launch
 
+@Composable
+fun InsertSupplierView(
+    onBack: () -> Unit,
+    onNavigate: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: SupplierViewModel = viewModel(factory = PenyediaViewModel.Factory)
+){
+    val uiState = viewModel.uiState
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(uiState.snackbarMessage){
+        uiState.snackbarMessage?.let { message ->
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(message)
+                viewModel.resetSnackBarSupplierMessage()
+            }
+        }
+    }
+
+    Scaffold(
+        topBar = {
+            AppBar(
+                judul = "Tambah Supplier",
+                onBack = onBack,
+                actionIcon = R.drawable.ka
+            )
+        },
+        modifier = modifier,
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(innerPadding)
+                .padding(16.dp)
+        ){
+            InsertBodySupplier(
+                uiState = uiState,
+                onValueChange = { updateEvent ->
+                    viewModel.updateState(updateEvent)
+                },
+                onClick = {
+                    viewModel.saveDataSupplier()
+                    onNavigate()
+                }
+            )
+        }
+    }
+}
 
 @Composable
 fun InsertBodySupplier(
