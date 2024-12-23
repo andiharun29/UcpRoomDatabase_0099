@@ -49,3 +49,58 @@ fun HalamanHome(
     }
 }
 
+@Composable
+fun HeaderSection() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(bottomEnd = 48.dp))
+            .background(color = colorResource(id = R.color.purple_500))
+            .padding(bottom = 32.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, top = 24.dp)
+        ) {
+            Column {
+                Icon(
+                    Icons.Filled.Home,
+                    contentDescription = "Home Icon",
+                    tint = Color.White,
+                    modifier = Modifier.padding(8.dp)
+                )
+                Spacer(Modifier.padding(3.dp))
+                Text(
+                    text = "Welcome",
+                    fontSize = 40.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+                Text(
+                    text = "to Our Warehouse",
+                    fontSize = 22.sp,
+                    color = Color.White,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+        }
+        Box(
+            Modifier.align(Alignment.CenterEnd)
+                .padding(24.dp)
+                .padding(top = 12.dp)
+        )
+        {
+            Image(
+                painter = painterResource(id = R.drawable.foto),
+                contentDescription = "Photo",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(100.dp)
+                    .clip(CircleShape)
+            )
+        }
+    }
+}
+
