@@ -41,7 +41,50 @@ import com.example.ucp2.ui.ViewModel.Barang.DetailUiState
 import com.example.ucp2.ui.ViewModel.Barang.toBarangEntity
 import com.example.ucp2.ui.ViewModel.PenyediaViewModel
 
+@Composable
+fun DetailBarangView(
+    modifier: Modifier = Modifier,
+    viewModel: DetailBarangViewModel = viewModel(factory = PenyediaViewModel.Factory),
+    onBack: () -> Unit = { },
+    onEditClick: (String) -> Unit = { },
+    onDeleteClick: () -> Unit = { }
 
+){
+    Scaffold (
+        topBar = {
+            AppBar(
+                judul = "Detail Mahasiswa",
+                showBackButton = true,
+                onBack = onBack,
+                actionIcon = R.drawable.su
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    onEditClick(viewModel.detailUiState.value.detailUiEvent.id)},
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Edit Mahasiswa"
+                )
+            }
+        }
+    ) { innerPadding ->
+        val detailUiState by viewModel.detailUiState.collectAsState()
+
+        BodyDetailMhs(
+            modifier = Modifier.padding(innerPadding),
+            detailUiState = detailUiState,
+            onDeleteClick = {
+                viewModel.deleteMhs()
+                onDeleteClick()
+            }
+        )
+    }
+}
 
 @Composable
 fun BodyDetailMhs(
