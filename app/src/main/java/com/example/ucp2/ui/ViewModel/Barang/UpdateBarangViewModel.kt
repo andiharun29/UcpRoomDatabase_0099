@@ -13,7 +13,24 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
+class UpdateBarangViewModel(
+    savedStateHandle: SavedStateHandle,
+    private val repositoryBarang: RepositoryBarang
+) : ViewModel(){
+    var updateUIState by mutableStateOf(BarangUIState())
+        private set
+    private val _id: String = checkNotNull(savedStateHandle[DestinasiUpdateBarang.id])
 
+    init {
+        viewModelScope.launch {
+            updateUIState = repositoryBarang.getBarang(_id)
+                .filterNotNull()
+                .first()
+                .toUIStateBarang()
+        }
+    }
+
+}
 
 fun Barang.toUIStateBarang(): BarangUIState = BarangUIState(
     barangEvent = this.toDetailUiEvent(),
