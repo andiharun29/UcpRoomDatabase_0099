@@ -50,6 +50,27 @@ import kotlinx.coroutines.launch
 
 
 @Composable
+fun ListBarang(
+    listBarang: List<Barang>,
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit
+){
+   LazyColumn(
+        modifier = modifier
+   ) {
+       items(
+           items = listBarang,
+           itemContent = { barang ->
+               CardBarang(
+                   barang = barang,
+                   onClick = { onClick(barang.id.toString()) }
+               )
+           }
+       )
+   }
+}
+
+@Composable
 fun CardBarang(
     barang: Barang,
     onClick: () -> Unit ={},
