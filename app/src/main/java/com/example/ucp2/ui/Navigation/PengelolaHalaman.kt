@@ -91,6 +91,29 @@ fun PengelolaHalaman(
                 modifier = Modifier
             )
         }
+        composable(
+            DestinasiDetailBarang.routeWithArgs,
+            arguments = listOf(
+                navArgument(DestinasiDetailBarang.id){
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val id = it.arguments?.getString(DestinasiDetailBarang.id)
+            id?.let {id ->
+                DetailBarangView(
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onEditClick = {
+                        navController.navigate("${DestinasiUpdateBarang.route}/$it")
+                    },
+                    onDeleteClick = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+        }
 
     }
 }
