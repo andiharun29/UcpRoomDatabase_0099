@@ -11,6 +11,16 @@ import kotlinx.coroutines.launch
 
 
 
+data class FormErrorSupplier(
+    val nama: String? = null,
+    val kontak: String? = null,
+    val alamat: String? = null
+){
+    fun isValid(): Boolean {
+        return nama != null && kontak != null && alamat != null
+    }
+}
+
 fun SupplierEvent.toSupplierEntity(): Supplier = Supplier(
     id = id,
     nama = nama,
