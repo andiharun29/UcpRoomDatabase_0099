@@ -9,7 +9,62 @@ import com.example.ucp2.Data.Entity.Barang
 import com.example.ucp2.Repository.Barang.RepositoryBarang
 import kotlinx.coroutines.launch
 
+class BarangViewModel(private  val repositoryBarang: RepositoryBarang): ViewModel() {
+    var uiState by mutableStateOf(BarangUIState())
 
+    //memperbaiki state berdasarkan input
+    fun updateState(barangEvent: BarangEvent) {
+        uiState = uiState.copy(
+            barangEvent = barangEvent,
+        )
+    }
+
+    //validasi data input pengguna
+    private fun validateFields(): Boolean {
+        val event = uiState.barangEvent
+        val errorstate = FormErrorBarangstate(
+            id = if (event.id.isNotEmpty()) null else "id tidak boleh kosong",
+            nama = if (event.nama.isNotEmpty()) null else "nama tidak boleh kosong",
+            deskripsi = if (event.deskripsi.isNotEmpty()) null else "deskripsi tidak boleh kosong",
+            harga = if (event.harga.isNotEmpty()) null else "harga tidak boleh kosong",
+            stok = if (event.stok.isNotEmpty()) null else "stok tidak boleh kosong",
+            nama_supplier =  if (event.nama_supplier.isNotEmpty()) null else "nama supplier tidak boleh kosong",
+        )
+
+        uiState = uiState.copy(
+            isEntryValid = errorstate
+        )
+        return errorstate.isValid()
+    }
+
+    fun saveData() {
+        val currentEvent = uiState.barangEvent
+
+        if (validateFields()) {
+            viewModelScope.launch {
+                try {
+                    repositoryBarang.insertBarang(currentEvent.toBarangEntity())
+                    uiState = uiState.copy(
+                        snackbarMessage = "Data berhasil disimpan",
+                        barangEvent = BarangEvent(),
+                        isEntryValid = FormErrorBarangstate()
+                    )
+                } catch (e: Exception) {
+                    uiState = uiState.copy(
+                        snackbarMessage = "data gagal disimpan"
+                    )
+                }
+            }
+        } else {
+            uiState = uiState.copy(
+                snackbarMessage = "input tidak valid periksa kembali data anda"
+            )
+        }
+    }
+    fun resetSnackBarMessage() {
+        uiState = uiState.copy(snackbarMessage = null)
+    }
+}
 
 data class BarangUIState(
     val barangEvent: BarangEvent = BarangEvent(),
