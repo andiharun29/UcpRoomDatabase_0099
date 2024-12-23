@@ -29,6 +29,11 @@ class UpdateBarangViewModel(
                 .toUIStateBarang()
         }
     }
+    fun updateState(barangEvent: BarangEvent){
+        updateUIState = updateUIState.copy(
+            barangEvent = barangEvent,
+        )
+    }
 
 }
 
