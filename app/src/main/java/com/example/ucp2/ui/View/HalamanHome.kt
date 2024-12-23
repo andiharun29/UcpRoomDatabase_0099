@@ -104,3 +104,49 @@ fun HeaderSection() {
     }
 }
 
+@Composable
+fun BodySection(
+    onItemClick: (String) -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = "Selamat datang di aplikasi manajemen gudang kami!",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Gray,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        Text(
+            text = "Gunakan fitur-fitur di bawah ini untuk mengelola Supplier dan Barang Anda dengan lebih efisien. " +
+                    "Pastikan untuk selalu memantau stok agar operasional tetap lancar.",
+            fontSize = 14.sp,
+            color = Color.Gray,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        ManageBox(
+            title = "Manage Supplier",
+            description = "Kelola data supplier di sini. Pantau dan atur informasi supplier dengan cepat.",
+            backgroundColor = Color(0xFF7D5260),
+            iconResource = R.drawable.su,
+            onClick = { onItemClick("Supplier") }
+        )
+
+        ManageBox(
+            title = "Manage Barang",
+            description = "Kelola data barang di sini. Tambahkan, ubah, atau hapus data barang dengan mudah.",
+            backgroundColor = Color(0xFF7D5260),
+            iconResource = R.drawable.ka,
+            onClick = { onItemClick("Barang") }
+        )
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+    }
+}
