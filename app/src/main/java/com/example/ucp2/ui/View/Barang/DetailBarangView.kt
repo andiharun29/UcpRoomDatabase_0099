@@ -43,6 +43,44 @@ import com.example.ucp2.ui.ViewModel.PenyediaViewModel
 
 
 
+
+@Composable
+fun ItemDetailBarang(
+    modifier: Modifier = Modifier,
+    barang: Barang
+
+){
+    Card (
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        )
+    ) {
+        Column (
+            modifier = Modifier.padding(16.dp)
+        ) {
+            ComponentDetailBarang(judul = "id", isinya = barang.id.toString())
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailBarang(judul = "Nama", isinya = barang.nama)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailBarang(judul = "deskripsi", isinya = barang.deskripsi)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailBarang(judul = "harga", isinya = barang.harga.toString())
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailBarang(judul = "stok", isinya = barang.stok.toString())
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailBarang(judul = "nama Supplier", isinya = barang.nama_supplier)
+            Spacer(modifier = Modifier.padding(4.dp))
+        }
+    }
+}
+
 @Composable
 fun ComponentDetailBarang(
     modifier: Modifier = Modifier,
