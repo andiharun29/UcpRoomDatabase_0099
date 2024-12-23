@@ -11,12 +11,12 @@ class LocalRepositorySupplier (
         supplierDao.insertSupplier(supplier)
     }
 
-    override fun getAllBarang(): Flow<List<Supplier>> {
+    override fun getAllSupplier(): Flow<List<Supplier>> {
         return supplierDao.getAllSupplier()
     }
 
-    override fun getSupplier(id: String): Flow<Supplier> {
-        return supplierDao.getSupplier(id)
+    override fun getNamaSupplier(): Flow<Supplier> {
+       return supplierDao.getNamaSupplier()
     }
 
 }
