@@ -50,6 +50,19 @@ fun PengelolaHalaman(
                 }
             )
         }
+        composable(
+            route = DestinasiInsertSupplier.route
+        ) {
+            InsertSupplierView(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = Modifier
+            )
+        }
 
     }
 }
