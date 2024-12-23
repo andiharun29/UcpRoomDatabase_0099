@@ -45,7 +45,43 @@ import com.example.ucp2.ui.ViewModel.Supplier.HomeUIStateSupplier
 import com.example.ucp2.ui.ViewModel.Supplier.SupplierHomeViewModel
 import kotlinx.coroutines.launch
 
+@Composable
+fun HomesupplierView(
+    modifier: Modifier = Modifier,
+    viewModel: SupplierHomeViewModel = viewModel(factory = PenyediaViewModel.Factory),
+    onBack: () -> Unit,
+    onAddSupplier: () -> Unit = {}
+) {
+    Scaffold(
+        topBar = {
+            AppBar(
+                onBack = onBack,
+                showBackButton = true,
+                judul = "Data Supplier",
+                actionIcon = R.drawable.ka
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onAddSupplier,
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = ""
+                )
+            }
+        }
+    ) {innerPadding ->
+        val homeSupplierUiState by viewModel.homeUIStateSupplier.collectAsState()
 
+        BodyHomeSupplierView(
+            homeUIState = homeSupplierUiState,
+            modifier = modifier.padding(innerPadding)
+        )
+    }
+}
 
 @Composable
 fun BodyHomeSupplierView(
