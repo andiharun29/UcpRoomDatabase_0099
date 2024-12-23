@@ -63,6 +63,21 @@ fun PengelolaHalaman(
                 modifier = Modifier
             )
         }
+        composable(
+            route = DestinasiHomeBarang.route
+        ){
+            HomeBarangView(
+                onAddBarangClick = {
+                    navController.navigate(DestinasiInsertBarang.route)
+                },
+                onDetailBarangClick = {
+                    navController.navigate("${DestinasiDetailBarang.route}/$id")
+                },
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
 
     }
 }
