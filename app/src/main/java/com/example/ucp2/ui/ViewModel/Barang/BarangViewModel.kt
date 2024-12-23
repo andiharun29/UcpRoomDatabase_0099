@@ -11,6 +11,20 @@ import kotlinx.coroutines.launch
 
 
 
+data class FormErrorBarangstate(
+    val id: String? = null,
+    val nama: String? = null,
+    val deskripsi: String? = null,
+    val harga: String? = null,
+    val stok: String? = null,
+    val nama_supplier: String? = null
+){
+    fun isValid(): Boolean{
+        return id== null && nama == null && deskripsi == null &&
+                harga == null && stok == null && nama_supplier == null
+    }
+}
+
 fun BarangEvent.toBarangEntity(): Barang = Barang(
     id = id.toIntOrNull() ?: 0,
     nama = nama,
