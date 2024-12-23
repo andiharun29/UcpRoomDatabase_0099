@@ -72,7 +72,7 @@ class UpdateBarangViewModel(
             )
         }
     }
-
+    
 }
 
 fun Barang.toUIStateBarang(): BarangUIState = BarangUIState(
