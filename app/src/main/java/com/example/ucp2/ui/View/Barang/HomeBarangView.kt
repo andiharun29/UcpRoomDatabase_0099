@@ -47,6 +47,46 @@ import com.example.ucp2.ui.ViewModel.Barang.HomeUIStateBarang
 import com.example.ucp2.ui.ViewModel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
+@Composable
+fun HomeBarangView(
+    modifier: Modifier = Modifier,
+    viewModel: BarangHomeviewmodel = viewModel(factory = PenyediaViewModel.Factory),
+    onAddBarangClick: () -> Unit ={},
+    onDetailBarangClick: (String) -> Unit = {},
+    onBack: () -> Unit
+){
+    Scaffold(
+        topBar = {
+            AppBar(
+                judul = "Home",
+                showBackButton = true,
+                onBack = onBack,
+                actionIcon = R.drawable.ka
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onAddBarangClick,
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Tambah Barang"
+                )
+            }
+        }
+    ){ innerPadding ->
+        val homeUIStateBarang by viewModel.homeUIStateBarang.collectAsState()
+
+        BodyHomeBarangView(
+            homeUiState = homeUIStateBarang,
+            onClick = {
+                onDetailBarangClick(it)},
+            modifier = modifier.padding(innerPadding),
+        )
+    }
+}
 
 @Composable
 fun BodyHomeBarangView(
