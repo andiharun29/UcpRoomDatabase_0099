@@ -41,6 +41,59 @@ import kotlinx.coroutines.launch
 
 
 
+@Composable
+fun InsertBarangView(
+    onBack: () -> Unit,
+    onNavigate: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: BarangViewModel = viewModel(factory = PenyediaViewModel.Factory) //Inisialisasi ViewModel
+){
+    val uiState = viewModel.uiState // Ambil UI State dari ViewModel
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
+    // Observasi perubahan snackbarMessage
+    LaunchedEffect(uiState.snackbarMessage){
+        uiState.snackbarMessage?.let {message ->
+            coroutineScope.launch{
+                //Tampilkan snackbar
+                snackbarHostState.showSnackbar(message)
+                viewModel.resetSnackBarMessage()
+            }
+        }
+    }
+    Scaffold(
+        modifier = Modifier,
+        snackbarHost = {SnackbarHost(hostState = snackbarHostState)}
+    ) { padding ->
+        Column (
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(16.dp)
+        ) {
+            AppBar(
+                onBack = onBack,
+                showBackButton = true,
+                judul = "Tambah Mahasiswa",
+                actionIcon = R.drawable.ka
+            )
+            //Isi Body
+            InsertBodyBarang(
+                uiState = uiState,
+                onValueChange = { updateEvent ->
+                    // Update state di ViewModel
+                    viewModel.updateState(updateEvent)
+                },
+                onClick = {
+                    viewModel.saveData()
+                    onNavigate()
+                }
+            )
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
