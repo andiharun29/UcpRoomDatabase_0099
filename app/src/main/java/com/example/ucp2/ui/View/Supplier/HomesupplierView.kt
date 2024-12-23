@@ -46,6 +46,50 @@ import com.example.ucp2.ui.ViewModel.Supplier.SupplierHomeViewModel
 import kotlinx.coroutines.launch
 
 
+
+@Composable
+fun BodyHomeSupplierView(
+    modifier: Modifier = Modifier,
+    homeUIState: HomeUIStateSupplier,
+){
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    when{
+        homeUIState.isLoading -> {
+            loadingState()
+        }
+        homeUIState.isError -> {
+            LaunchedEffect(homeUIState.errorMessage){
+                homeUIState.errorMessage?.let { message ->
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(message)
+                    }
+                }
+            }
+        }
+        homeUIState.listSupplier.isEmpty() -> {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = "Data Tidak Ditemukan",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
+        }
+        else -> {
+            ListSupplier(
+                listsupplier = homeUIState.listSupplier,
+                modifier = modifier
+            )
+        }
+    }
+}
+
 @Composable
 fun ListSupplier(
     listsupplier: List<Supplier>,
