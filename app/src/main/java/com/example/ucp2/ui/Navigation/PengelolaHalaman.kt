@@ -78,6 +78,19 @@ fun PengelolaHalaman(
                 }
             )
         }
+        composable(
+            route = DestinasiInsertBarang.route
+        ){
+            InsertBarangView(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = Modifier
+            )
+        }
 
     }
 }
