@@ -39,7 +39,32 @@ import com.example.ucp2.ui.ViewModel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
 
-
+@Composable
+fun InsertBodyBarang(
+    modifier: Modifier = Modifier,
+    onValueChange: (BarangEvent) -> Unit,
+    uiState: BarangUIState,
+    onClick: () -> Unit
+){
+    Column (
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        FormBarang(
+            barangEvent = uiState.barangEvent,
+            onValueChange = onValueChange,
+            errorState = uiState.isEntryValid,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Button(
+            onClick = onClick,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Simpan")
+        }
+    }
+}
 
 @Composable
 fun InsertBarangView(
