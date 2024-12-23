@@ -50,3 +50,5 @@ object PenyediaViewModel{
     }
 }
 
+fun CreationExtras.TokoApp(): TokoApp =
+    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as TokoApp)
