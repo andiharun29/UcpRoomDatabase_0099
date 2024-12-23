@@ -11,6 +11,12 @@ import kotlinx.coroutines.launch
 
 
 
+data class BarangUIState(
+    val barangEvent: BarangEvent = BarangEvent(),
+    val isEntryValid: FormErrorBarangstate = FormErrorBarangstate(),
+    val snackbarMessage: String? = null,
+)
+
 data class FormErrorBarangstate(
     val id: String? = null,
     val nama: String? = null,
