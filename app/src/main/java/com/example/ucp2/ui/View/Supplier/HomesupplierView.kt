@@ -46,6 +46,22 @@ import com.example.ucp2.ui.ViewModel.Supplier.SupplierHomeViewModel
 import kotlinx.coroutines.launch
 
 
+@Composable
+fun ListSupplier(
+    listsupplier: List<Supplier>,
+    modifier: Modifier = Modifier,
+){
+    LazyColumn(
+        modifier = modifier
+    ){
+        items(listsupplier,
+            itemContent = { supplier ->
+                CardSupplier(supplier = supplier
+                )
+            }
+        )
+    }
+}
 
 @Composable
 fun CardSupplier(
