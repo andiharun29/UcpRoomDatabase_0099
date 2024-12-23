@@ -38,6 +38,18 @@ fun PengelolaHalaman(
                 }
             )
         }
+        composable(
+            route = DestinasiHomeSupplier.route
+        ){
+            HomesupplierView(
+                onAddSupplier = {
+                    navController.navigate(DestinasiInsertSupplier.route)
+                },
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
 
     }
 }
