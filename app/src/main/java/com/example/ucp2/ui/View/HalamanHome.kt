@@ -150,3 +150,47 @@ fun BodySection(
 
     }
 }
+
+@Composable
+fun ManageBox(
+    title: String,
+    description: String,
+    backgroundColor: Color,
+    iconResource: Int,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = backgroundColor, shape = RoundedCornerShape(16.dp))
+            .clickable { onClick() }
+            .padding(16.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+                Text(
+                    text = description,
+                    fontSize = 14.sp,
+                    color = Color.White
+                )
+            }
+            Image(
+                painter = painterResource(id = iconResource),
+                contentDescription = "$title Icon",
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+            )
+        }
+    }
+}
