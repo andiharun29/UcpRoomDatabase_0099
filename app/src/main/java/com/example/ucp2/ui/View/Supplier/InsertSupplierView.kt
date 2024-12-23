@@ -35,6 +35,37 @@ import com.example.ucp2.ui.ViewModel.Supplier.SupplierViewModel
 import kotlinx.coroutines.launch
 
 
+@Composable
+fun InsertBodySupplier(
+    modifier: Modifier = Modifier,
+    onValueChange: (SupplierEvent) -> Unit,
+    uiState: SupplierUIState,
+    onClick: () -> Unit
+){
+    Column (
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        FormSupplier(
+            supplierEvent = uiState.supplierEvent,
+            onValueChange = onValueChange,
+            errorState = uiState.isEntryValid,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = onClick,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text(
+                "Simpan",
+                color = Color.White,
+                fontSize = 18.sp
+            )
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
