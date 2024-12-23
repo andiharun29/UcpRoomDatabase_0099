@@ -48,6 +48,53 @@ import com.example.ucp2.ui.ViewModel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
 
+@Composable
+fun BodyHomeBarangView(
+    homeUiState: HomeUIStateBarang,
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit,
+){
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+    when{
+        homeUiState.isLoading -> {
+            loadingState()
+        }
+        homeUiState.isError -> {
+            LaunchedEffect (homeUiState.errorMessage) {
+                homeUiState.errorMessage?.let { message ->
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(message)
+                    }
+                }
+            }
+        }
+
+        homeUiState.listBarang.isNotEmpty() -> {
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = "Tidak ada data barang",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
+        else -> {
+            ListBarang(
+                listBarang = homeUiState.listBarang,
+                onClick = {
+                    onClick(it)
+                    println(it)
+                },
+                modifier = modifier
+            )
+        }
+    }
+}
 
 @Composable
 fun ListBarang(
