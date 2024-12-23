@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface RepositorySupplier {
     suspend fun insertSupplier(supplier: Supplier)
 
-    fun getAllBarang(): Flow<List<Supplier>>
+    fun getAllSupplier(): Flow<List<Supplier>>
 
-    fun getSupplier(id: String): Flow<Supplier>
+    fun getNamaSupplier(): Flow<Supplier>
 }
