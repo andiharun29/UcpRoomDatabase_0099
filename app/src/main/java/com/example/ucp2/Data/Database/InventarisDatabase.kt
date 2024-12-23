@@ -18,14 +18,14 @@ abstract class InventarisDatabase : RoomDatabase(){
         private var Instance: InventarisDatabase? = null
 
         fun getDatabase(context: Context): InventarisDatabase{
-            return (Instance?: synchronized(this){
+            return Instance?: synchronized(this){
                 Room.databaseBuilder(
                     context,
                     InventarisDatabase::class.java,
                     "InventarisDatabase"
                 )
                     .build().also { Instance = it }
-            })
+            }
         }
     }
 }
