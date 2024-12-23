@@ -25,6 +25,28 @@ object PenyediaViewModel{
                 TokoApp().containerApp.repositorySupplier
             )
         }
+        initializer {
+            BarangViewModel(
+                TokoApp().containerApp.repositoryBarang
+            )
+        }
+        initializer {
+            BarangHomeviewmodel(
+                TokoApp().containerApp.repositoryBarang
+            )
+        }
+        initializer {
+            DetailBarangViewModel(
+                createSavedStateHandle(),
+                TokoApp().containerApp.repositoryBarang
+            )
+        }
+        initializer {
+            UpdateBarangViewModel(
+                createSavedStateHandle(),
+                TokoApp().containerApp.repositoryBarang,
+            )
+        }
     }
 }
 
