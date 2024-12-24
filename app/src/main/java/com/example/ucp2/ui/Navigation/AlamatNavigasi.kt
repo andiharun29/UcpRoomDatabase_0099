@@ -24,4 +24,10 @@ object DestinasiInsertBarang : AlamatNavigasi {
     override val route = "insertBarang"
 }
 
+object DestinasiUpdateBarang : AlamatNavigasi {
+    override val route = "updateBarang"
+    const val id = "Id"
+    val routeWithArgs = "$route/{$id}"
+}
+
 
