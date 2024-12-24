@@ -15,3 +15,8 @@ object DestinasiHomeSupplier : AlamatNavigasi {
 object DestinasiInsertSupplier : AlamatNavigasi {
     override val route = "insertSupplier"
 }
+
+object DestinasiHomeBarang : AlamatNavigasi {
+    override val route = "barang"
+}
+
