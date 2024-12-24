@@ -114,6 +114,22 @@ fun PengelolaHalaman(
                 )
             }
         }
-
+        composable(
+            DestinasiUpdateBarang.routeWithArgs,
+            arguments = listOf(
+                navArgument(DestinasiUpdateBarang.id) {
+                    type = NavType.StringType
+                }
+            )
+        ){
+            UpdateBarangView(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onNavigate = {
+                    navController.popBackStack()
+                }
+            )
+        }
     }
 }
