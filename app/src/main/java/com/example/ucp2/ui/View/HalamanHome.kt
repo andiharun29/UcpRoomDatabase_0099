@@ -115,7 +115,7 @@ fun BodySection(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "Selamat datang di aplikasi manajemen gudang kami!",
+            text = "Selamat datang!",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Gray,
@@ -123,8 +123,7 @@ fun BodySection(
         )
 
         Text(
-            text = "Gunakan fitur-fitur di bawah ini untuk mengelola Supplier dan Barang Anda dengan lebih efisien. " +
-                    "Pastikan untuk selalu memantau stok agar operasional tetap lancar.",
+            text = "Ayo Coba fitur kami di bawah.",
             fontSize = 14.sp,
             color = Color.Gray,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -132,7 +131,7 @@ fun BodySection(
 
         ManageBox(
             title = "Manage Supplier",
-            description = "Kelola data supplier di sini. Pantau dan atur informasi supplier dengan cepat.",
+            description = "Kelola data supplier.",
             backgroundColor = Color(0xFF7D5260),
             iconResource = R.drawable.su,
             onClick = { onItemClick("Supplier") }
@@ -140,7 +139,7 @@ fun BodySection(
 
         ManageBox(
             title = "Manage Barang",
-            description = "Kelola data barang di sini. Tambahkan, ubah, atau hapus data barang dengan mudah.",
+            description = "Kelola data barang.",
             backgroundColor = Color(0xFF7D5260),
             iconResource = R.drawable.ka,
             onClick = { onItemClick("Barang") }
